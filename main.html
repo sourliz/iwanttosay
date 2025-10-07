@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="sourlizi">
+    <link rel=icon href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAABI9JREFUWEfFl9mvjWcUxn+GUtRUU9UQrakSVJVSQ8QQkmoiJG5Jet8/xCVJr3CBa1IaTSvViwYtWsQ8tKgqrXNoqVJHDd/vZC35zs4+Z+99SLzJzs7e7/e961lrPetZ6+3CS15dath3vxfwWnz6xO8eQHega7z/GPgfaAHuA/8C/8S3v5+0Z6cWAA0OB0YDbwEjgWHAAKA38Eoc/hC4B/wN3AB+Ay4DvwJ/BJCqGKoB6Ab0C0MjgFHAG8DrYdg9o2IUfFbvHgEJQs8FcjOMXwX8/BlR8dlnqxKAYTXcE4G5wKQw+h9wLQ65DdwF/M+wu3zvVcCIGR2j9CbQM8CcBg4A5ytBJAC/PWRoGJ8CTAYGRWh/B84Bl4DrwF8Bwpy7jIbAjZLRMl06YQSNltE4BRwPEKbJiJEAzKXIpwPLIuy+9EsYNoRpVFI9CO+TXOmAHssNwXienBHI2HDmCvAVcBQwkg8TwJDweDbwfuT0IODnbHjQmYI1gqZxFvBBVM2Pca4RaUrkhnwlMB5oBszZTxEBCdWGOA0gkaRGwgjomGAEdQH4HDghAPP1XpGfVRG6b4B9wEXgTgPGOnrUynkbmAcsDv5sB44JYHXU+bvB2J3A4WBruwLSIDDt9AVmFvlfEVE5pk64sa6kaj8DeyJEDdqo6/EJRTkuBcYFiVtJuDvUy7wfiVJpquu4xh+yzKdGyuXDEAFo2M8XwP4QHMmTkqsZS0ZJVeVchtN67x+/29s39/m+SiiZFShF7mNJKQBF4VBR+5uBb8OIrF0SrPWAMwWBJKfsdVkt9e7LI9/fG1UlqEXAJ3JCAHYuWb8B+DpyY8msLURDXXD9UFTLlihNf9fan1FU0Zp4XwDfF6W4Ld5X9OTBp1ZFGcD6IKD6roE8IAFsrQDQ0X5DABQeFW9ThMlGYwqsV4mSKTCE5RTU2s8U1UyB+ZGE1r+pkGxJwiSZglSNhEmyWvuSVBI6uCQJlycJv4zNk9EkTqjRjVdYXW9YhgqeyvtOlmEKkScoRGW213VqAw9VClFLSrFTjwJh49lV1Kgdy+robBOqxKQd05VSbGptya1SbDOaFs3IicYIKEjOdObuRSwNZjNSAxS0HYKobMdqtMKkJH8XIJ4HQLZjz8127NTkaCbpW9uxS9k1BR8GSRzBFA674vOswRUDifY807J3IGlOAI5RlsfCGEwM/WdRlgLwOcct58byFJwccV+F85m8RwwsjWSG30HEMd2RzFbcZiQz985v8wuE1qdk3BiTrACc8TzAw61l58KcjP2t8RxKvUfkUJqTsfOlZW6JG37LvM1QKlrzNCdAWAF2RydhwWnc0crR2+XLjuVOxUbBXOu9IDzLlArEadlhVqGT2CqpwJ9VV6bA1upEbPORC4bZYVRPjYzG/S9D7cF67dWsfC3zdlTtYiKnOryYjAEWxOTqNcyl9NqY9EgPlVs917ipKF/NjIRRK1/NvEM4hnuOwKqujIAK9RFgF9NbPfd+5yXkVunj/3otGSsvp4ITiKnJy2nypObl1K7nsGit6pme6IGEMW96Ytf0QvJC11N9HlHvU7JT+gAAAABJRU5ErkJggg==">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="manifest" href="/app.webmanifest" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="x-UA-Compatible" content="IE=Edge, chrome=1">
+    <title>I want to say</title>
+<style nonce="ILOVECYJ">
+:root {
+    --primary-color: #00c8b3;
+    --primary-light: #D8ECE9;
+    --secondary-color: #F5F1EB;
+    --secondary-dark: #E8C693;
+    --text-primary: #263238;
+}
+
+::view-transition-group(root) { animation-duration: 0.4s }
+
+::view-transition-old(page) { animation-name: move-out }
+
+::view-transition-new(page) { animation-name: move-in }
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html, body {
+    overscroll-behavior: none;
+    height: 100dvh;
+}
+
+body {
+    background-image: linear-gradient(to top, #FBC2EB45 0%, #A6C1EE59 100%);
+    color: var(--text-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.85;
+    touch-action: none;
+}
+
+.page-container {
+    width: 94dvw;
+    background-color: #FFFFFC;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    height: 95dvh;
+    display: flex;
+    flex-direction: column;
+}
+
+#join {
+    height: 100%;
+    view-transition-name: page;
+    display: none;
+    padding: 70px;
+    text-align: center;
+}
+
+#join p {
+    color: var(--text-primary);
+    font-size: clamp(1.5rem, 5vw, 2rem);
+    margin-bottom: 25px;
+    font-weight: 500;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-dark));
+    background-clip: text;
+    color: transparent;
+}
+
+#join input[type="number"] {
+    border-radius: 10px;
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    appearance: textfield;
+    border: 2px solid var(--primary-light);
+    transition: all 0.3s ease;
+}
+
+#join input[type="number"]:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 200, 179, 0.2);
+}
+
+.input-area input[type="text"] {
+    border-radius: 6px;
+    margin-top: 5px;
+    border: 1px solid var(--primary-light);
+    width: 100%;
+    height: 75%;
+    padding: 10px;
+    border: none;
+    border-top: 1px solid #eee;
+    resize: none;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.input-area input[type="text"]:focus {
+    box-shadow: 0 0 0 3px rgba(0, 200, 179, 0.2);
+    outline: none;
+    background-color: #f9f9f9;
+}
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0;
+}
+
+button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease, transform 0.2s ease;
+}
+
+#chat {
+    display: none;
+    flex-direction: column;
+    min-height: 500px;
+    flex: 1;
+}
+
+#room_num { font-weight: bold; }
+
+#chat button {
+    margin-left: 10px;
+    padding: 8px 16px;
+    font-size: 14px;
+}
+
+.input-area button, #btn-container button {
+    padding: 0 !important;
+    background: rgba(0, 0, 0, 0);
+    color: var(--primary-color);
+}
+
+#container {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    contain: strict;
+    touch-action: manipulation;
+}
+
+.content {
+    font-size: 14px;
+    background: linear-gradient(145deg, var(--secondary-color), white);
+    padding: 10px 14px;
+    border-radius: 18px 18px 18px 6px;
+    max-width: 70%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+    align-self: flex-start;
+    animation: fade-in 0.4s ease;
+    position: relative;
+    white-space: normal;
+    overflow-wrap: break-word;
+    display: inline-block;
+}
+
+.content img {
+    width: 170px;
+    height: 170px;
+    border-radius: 6px;
+    overflow: hidden;
+    background: transparent;
+    object-fit: cover;
+    display: inline-block;
+    contain: strict;
+}
+
+.date {
+    animation: come-in 0.4s ease;
+    font-size: 11px;
+    color: #7f8c8d;
+    display: inline-block;
+    text-align: right;
+    white-space: pre-wrap;
+    position: absolute;
+    bottom: 3px;
+    right: 3px;
+}
+
+#chat .top {
+    display: flex;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 4px 10px;
+    margin: 0;
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    justify-content: space-between;
+    align-items: center;
+}
+
+#chat .input-area {
+    background-image: linear-gradient(120deg, #84fab050 0%, #8fd3f450 100%) !important;
+    padding: 0 10px;
+    display: flex;
+    background-color: white;
+    border: none;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.03);
+    border-radius: 8px;
+}
+
+#image-preview {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+#image-preview img {
+    max-width: 94%;
+    max-height: 94%;
+    object-fit: contain;
+    border-radius: 6px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+#btn-container{
+    width: 92%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.input-area input[type="file"] {display: none;}
+
+.primary-btn { background: linear-gradient(135deg, var(--primary-color), #00a190); color: white; }
+
+.secondary-btn { background: linear-gradient(135deg, var(--secondary-color), var(--secondary-dark)); color: var(--text-primary); }
+
+.danger-btn { background: linear-gradient(135deg, #ff6b6b, #ee5253); color: white; }
+
+.page-container p { position: relative; }
+
+@keyframes fade-in {
+    from { opacity: 0; transform: translateY(-15px); }
+    to { opacity: 0.85; transform: translateY(0); }
+}
+
+@keyframes come-in {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 0.85; transform: translateX(0); }
+}
+
+@keyframes move-out {
+    from { transform: translateX(0%) }
+    to { transform: translateX(-100%) }
+}
+
+@keyframes move-in {
+    from { transform: translateX(100%) }
+    to { transform: translateX(0%) }
+}
+</style>
+</head>
+<body>
+    <div class="page-container">
+        <div id="image-preview">
+            <div id="btn-container">
+                <button onclick="share_img()" class="primary-btn"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-share" viewBox="0 0 16 16"><path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.5 2.5 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5m-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3m11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3"/></svg></button>
+                <button onclick="close_img()" class="primary-btn"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/></svg></button>
+            </div>
+            <img id="preview-img" src="" alt="图片预览">
+        </div>
+        <div id="join">
+            <p>输入房间号</p>
+            <input type="number" id="join-number" placeholder="输入房间号" autofocus>
+            <button onclick="handle_join()" class="primary-btn">提交</button>
+        </div>
+        <div id="chat">
+            <p class="top">
+                <button onclick="handle_exit()" class="danger-btn">退出房间</button>
+                <span id="room_num"></span>
+                <button onclick="handle_reload()" class="secondary-btn">刷新</button>
+            </p>
+            <div id="container"></div>
+            <div class="input-area">
+                <input type="text" id="msg-content" placeholder="输入消息内容..." autofocus>
+                <input type="file" id="file-upload" accept="*" multiple>
+                <button onclick="ID('file-upload').click()" class="secondary-btn"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-file-earmark-plus-fill" viewBox="0 0 16 16"><path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1M8.5 7v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 1 0"/></svg></button>
+                <button onclick="handle_send()" class="primary-btn"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0m-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"/></svg></button>
+            </div>
+        </div>
+    </div>
+<script>
+function promisify(request) {
+    return new Promise((resolve, reject) => {
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = () => reject(request.error);
+    });
+}
+
+class DBStorage {
+    constructor(db_name, store_name) {
+        const request = window.indexedDB.open(db_name);
+        request.onupgradeneeded = () => request.result.createObjectStore(store_name);
+        this.db_promise = promisify(request);
+        this.store_name = store_name;
+    }
+
+    async getStore(operation_mode, store_name = this.store_name) {
+        const db = await this.db_promise;
+        return db.transaction(store_name, operation_mode).objectStore(store_name);
+    }
+
+    async setItem(key, value) {
+        const store = await this.getStore("readwrite");
+        return promisify(store.put(value, key));
+    }
+
+    async getItem(key) {
+        const store = await this.getStore("readonly");
+        return promisify(store.get(key));
+    }
+
+    async removeItem(key) {
+        const store = await this.getStore("readwrite");
+        return promisify(store.delete(key));
+    }
+
+    async clear() {
+        const store = await this.getStore("readwrite");
+        return promisify(store.clear());
+    }
+}
+
+const ua = navigator.userAgent.toLowerCase();
+
+const is_safari = ua.indexOf('safari') != -1 && ua.indexOf('chrome') == -1;
+
+const ID = node => document.getElementById(node);
+
+var room;
+
+var is_load = false;
+
+const storage = new DBStorage("data", "data");
+
+storage.getItem("room").then((db_room) => {
+    room = db_room;
+    room ? handle_join(true) : ID("chat").style.display = "none"; ID("join").style.display = "block"
+});
+
+navigator.serviceWorker.register("/service_worker.js");
+
+const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
+
+async function request(path, data, is_blob=false){
+    const response = await fetch(path, {
+        method: "POST",
+        headers: {"Content-Type": "application/json; charset=utf-8"},
+        body: JSON.stringify(data)
+    });
+    if (response.ok) return is_blob ? await response.blob() : await response.json();
+}
+
+async function get_img(filename, img_node){
+    try {
+        var db_img = await storage.getItem(filename);
+        if (!db_img){
+            var response = await request("/data", {filename: filename}, true);
+            if (is_safari) storage.setItem(filename, await response.arrayBuffer());
+            else storage.setItem(filename, response);
+        } else {
+            if (is_safari) db_img = new Blob([db_img]);
+            var response = db_img;
+        }
+        const blob_url = window.URL.createObjectURL(response);
+        await sleep(400);
+        img_node.src = blob_url;
+        img_node.onclick = () => show_img(blob_url, filename)
+    } catch {
+        img_node.alt = "图片加载失败";
+    }
+}
+
+async function handle_reload() {
+    if (is_load) return;
+    is_load = true;
+    ID("room_num").textContent = `房间${room}`;
+    const container = ID("container");
+    container.innerHTML = "";
+    const frag = document.createDocumentFragment();
+    const response = await request("/join", {room: room});
+    const observer = new IntersectionObserver(load_img, {root: container});
+    for (const msg of response) {
+        const [content, date] = msg;
+        const new_p = document.createElement("p");
+        const new_content = document.createElement("span");
+        const new_date = document.createElement("span");
+        new_content.className = "content";
+        new_date.className = "date";
+        new_date.textContent = date;
+        if (content.startsWith("FILE:")) {
+            const filename = content.split(":")[1];
+            const new_img = document.createElement("img");
+            new_img.alt = "图片加载中";
+            new_content.appendChild(new_img);
+            new_img.setAttribute("data-filename", filename);
+            observer.observe(new_img);
+        } else new_content.textContent = content;
+        new_p.appendChild(new_content);
+        new_p.appendChild(new_date);
+        frag.insertBefore(new_p, frag.children[0]);
+    }
+    container.appendChild(frag);
+    container.scrollTop = container.scrollHeight;
+    is_load = false;
+}
+
+async function handle_file_upload(file) {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("room", room);
+    const response = await fetch("/file", {method: "POST", body: formData});
+    if (response.ok) if (await response.json() === "complete") handle_reload();
+}
+
+async function handle_send() {
+    msg = ID("msg-content").value;
+    if (!msg) return;
+    ID("msg-content").value = "";
+    const response = await request("/msg", {room: room, msg: msg});
+    if (response === "complete") {
+        handle_reload();
+    }
+}
+
+async function share_img() {
+    const img_node = ID("preview-img")
+    const response = await fetch(img_node.src);
+    const blob = await response.blob();
+    const file = new File([blob], img_node.name, { type: blob.type });
+    navigator.share({files: [file]});
+}
+
+async function handle_join(direct=false) {
+    room = await storage.getItem("room") || ID("join-number").value;
+    if (!room) return;
+    ID("join-number").value = "";
+    change_page(direct);
+    storage.setItem("room", room);
+    handle_reload();
+}
+
+function load_img(entries, observer) {
+    for (let i of entries) {
+        if (i.isIntersecting) {
+            let img = i.target;
+            let filename = img.getAttribute("data-filename");
+            get_img(filename, img);
+            observer.unobserve(img);
+        }
+   }
+}
+
+function change_page(direct=false){
+    const change_page_direct = function() {
+        if (ID("join").style.display === "none"){
+            ID("chat").style.display = "none";
+            ID("join").style.display = "block";
+        } else {
+            ID("join").style.display = "none";
+            ID("chat").style.display = "flex";
+        }
+    }
+    if (direct || !document.startViewTransition) change_page_direct();
+    else document.startViewTransition(() => change_page_direct());
+}
+
+function handle_exit() {
+    storage.removeItem("room");
+    change_page();
+}
+
+function show_img(blob_url, filename) {
+    const show_img_direct = function(){
+        ID("preview-img").src = blob_url;
+        ID("preview-img").name = filename;
+        ID("image-preview").style.display = "flex";
+    }
+    if (!document.startViewTransition) show_img_direct();
+    else document.startViewTransition(() => show_img_direct());
+}
+function close_img(){
+    const close_img_direct = function(){ID("image-preview").style.display = "none"}
+    if (!document.startViewTransition) close_img_direct();
+    else document.startViewTransition(() => close_img_direct());
+}
+ID("file-upload").addEventListener("change", event => {
+    const files = event.target.files;
+    for (const file of files){
+        handle_file_upload(file);
+    }
+});
+
+ID("join-number").addEventListener("keydown", event => {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        handle_join();
+    }
+});
+
+ID("msg-content").addEventListener("keydown", event => {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        handle_send();
+  }
+});
+
+ID("image-preview").addEventListener("click", event => {
+    if ([ID("image-preview"), ID("btn-container")].includes(event.target)) close_img();
+});
+
+var last_touch_end = 0;
+
+document.addEventListener("touchend", event => {
+    var now = Date.now();
+    if (now - last_touch_end <= 300) event.preventDefault();
+    last_touch_end = now; }, { passive: false });
+
+document.addEventListener("gesturestart", event => event.preventDefault())
+</script>
+</body>
+</html>

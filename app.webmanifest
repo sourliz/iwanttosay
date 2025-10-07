@@ -1,0 +1,12 @@
+{
+"name": "I want to say",
+"short_name": "I want to say",
+"manifest_version": 3,
+"version": "0.1.0",
+"start_url": "/",
+"display": "standalone",
+"background_color": "#FFFFFC",
+"theme_color": "#FFFFFC",
+"icons": [],
+"description": "Free Chat"
+}

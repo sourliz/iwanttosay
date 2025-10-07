@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>I want to say</title>
+    <style>
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none !important;
+            margin: 0;
+        }
+        input[type="number"]{
+            moz-appearance:textfield;
+        }
+        .content {
+            font-size: 17px;
+        }
+        .date {
+            font-size: 10px;
+            }
+    </style>
+</head>
+<body>
+    <div id="join">
+        <p>输入房间号</p>
+        <input type="number" id="join-number" placeholder="输入房间号">
+        <button onclick="handle_join()">提交</button>
+    </div>
+    <div id="chat">
+        <p>房间<span id="room_num"></span></p>
+        <button onclick="handle_exit()">退出房间</button>
+        <button onclick="handle_reload()">刷新</button>
+        <textarea id="msg-content" placeholder="内容" rows=2></textarea>
+        <button onclick="handle_send()">发送</button>
+        <div id="container"></div>
+    </div>
+    <script>
+    if (typeof String.prototype.startsWith !== 'function') {
+    String.prototype.startsWith = function(prefix) {
+        return this.slice(0, prefix.length) === prefix;
+    };
+}
+
+        function ID(node) {
+            return document.getElementById(node);
+        }
+        var storage = window.localStorage;
+        var room;
+       room = storage.getItem("room");
+
+        if (!room) {
+            ID("chat").style.display = "none";
+        } else{
+            handle_join();
+        }
+        function handle_exit() {
+            storage.removeItem("room");
+            ID("chat").style.display = "none";
+            ID("join").style.display = "block";
+        }
+        function handle_reload(){
+            ID("room_num").textContent = room;
+            var container = ID("container");
+            while(container.firstChild) {
+                container.removeChild(container.firstChild);
+            }
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/join", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.send(JSON.stringify({room: room}));
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200){
+                    response = JSON.parse(xhr.responseText);
+                    for (var i=0; i<response.length; i++) {
+                        msg = response[i];
+                        content = msg[0];
+                        date = msg[1];
+                        const new_p = document.createElement("p");
+                        const new_date = document.createElement("span");
+                        if (content.startsWith("FILE:")) {
+                            var new_content = document.createElement("a");
+                            new_content.textContent = "图片";
+                            new_content.href = "https://www.pythonanywhere.com/user/sourlizi/files/home/sourlizi/mysite/data/files/" + content.split(":")[1];
+                        } else{
+                            var new_content = document.createElement("span");
+                            new_content.textContent = content;
+                        }
+                        new_content.className = "content";
+                        new_date.className = "date";
+                        new_date.textContent = date;
+                        new_p.appendChild(new_content);
+                        new_p.appendChild(new_date);
+                        container.insertBefore(new_p, null);
+                    }
+                }
+            }
+        }
+        function handle_send() {
+            msg = ID("msg-content").value;
+            if (!msg){return;}
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/msg", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.send(JSON.stringify({room: room, msg:msg}));
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200){
+                    response = JSON.parse(xhr.responseText);
+                    if (response === "complete") {
+                        ID("msg-content").value = "";
+                        handle_reload();
+                    }
+                }
+            }
+        }
+        function handle_join() {
+            room = storage.getItem("room") || ID("join-number").value;
+            if (!room){return;}
+            ID("join-number").value = "";
+            ID("join").style.display = "none";
+            ID("chat").style.display = "block";
+            storage.setItem("room", room);
+            handle_reload();
+        }
+    </script>
+</body>
+</html>
